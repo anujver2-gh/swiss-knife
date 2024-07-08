@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: swiss-knife
+  labels:
+    app: swiss-knife
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: swiss-knife
+  template:
+    metadata:
+      labels:
+        app: swiss-knife
+    spec:
+      containers:
+        - name: swiss-knife
+          image: 114040874283.dkr.ecr.cn-northwest-1.amazonaws.com.cn/china/generic:swiss-knife
+          ports:
+            - containerPort: 80
+          securityContext:
+            allowPrivilegeEscalation: false
+            runAsUser: 0
