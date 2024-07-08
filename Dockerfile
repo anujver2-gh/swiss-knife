@@ -76,8 +76,16 @@ RUN wget https://raw.githubusercontent.com/technomancy/leiningen/${LEIN_VERSION}
     chmod a+x /usr/local/bin/lein && \
     lein
 
+# Default powerline10k theme, no plugins installed
+RUN sh -c "$(wget -O- https://github.com/deluan/zsh-in-docker/releases/download/v1.2.0/zsh-in-docker.sh)"
+
+COPY .zshrc /root/.zshrc
+COPY .p10k.zsh /root/.p10k.zsh
+
+
 # Set the working directory
 WORKDIR /workspace
+
 
 # Default command to run when starting the container
 ENTRYPOINT ["tail", "-f", "/dev/null"]
