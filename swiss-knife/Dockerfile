@@ -1,5 +1,5 @@
 # Use Ubuntu as the base image
-FROM containers.cisco.com/sto-ccc-cloud9/hardened_ubuntu:22.04
+FROM --platform=linux/x86_64 containers.cisco.com/sto-ccc-cloud9/hardened_ubuntu:22.04
 
 # Set environment variables for Java and Python versions
 ENV JAVA_VERSION 11
