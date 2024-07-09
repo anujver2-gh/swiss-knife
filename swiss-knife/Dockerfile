@@ -1,5 +1,5 @@
 # Use Ubuntu as the base image
-FROM ubuntu:22.04
+FROM containers.cisco.com/sto-ccc-cloud9/hardened_ubuntu:22.04
 
 # Set environment variables for Java and Python versions
 ENV JAVA_VERSION 11
@@ -70,4 +70,4 @@ WORKDIR /workspace
 
 
 # Default command to run when starting the container
-ENTRYPOINT ["tail", "-f", "/dev/null"]
+CMD ["sleep", "1000000"]
