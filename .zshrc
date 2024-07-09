@@ -136,6 +136,7 @@ plugins=(
 	# python
 	# zsh-nvm
 	asdf
+	git
  )
 
 
