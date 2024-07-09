@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: swiss-knife
+  name: swiss-knife-cisco
   labels:
-    app: swiss-knife
+    app: swiss-knife-cisco
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: swiss-knife
+      app: swiss-knife-cisco
   template:
     metadata:
       labels:
-        app: swiss-knife
+        app: swiss-knife-cisco
     spec:
       containers:
-        - name: swiss-knife
-          image: 114040874283.dkr.ecr.cn-northwest-1.amazonaws.com.cn/china/generic:swiss-knife
+        - name: swiss-knife-cisco
+          image: 114040874283.dkr.ecr.cn-northwest-1.amazonaws.com.cn/china/generic:swiss-knife-cisco
           ports:
             - containerPort: 80
           securityContext:
