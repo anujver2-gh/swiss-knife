@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: swiss-knife-ubuntu
+  labels:
+    app: swiss-knife-ubuntu
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: swiss-knife-ubuntu
+  template:
+    metadata:
+      labels:
+        app: swiss-knife-ubuntu
+    spec:
+      containers:
+        - name: swiss-knife-ubuntu
+          image: 114040874283.dkr.ecr.cn-northwest-1.amazonaws.com.cn/china/generic:swiss-knife-ubuntu
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+          securityContext:
+            allowPrivilegeEscalation: false
+            runAsUser: 0
