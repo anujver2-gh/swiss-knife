@@ -63,6 +63,8 @@ spec:
           securityContext:
             allowPrivilegeEscalation: false
             runAsUser: 0
+          ports:
+            - containerPort: 80
           volumeMounts:
             - mountPath: /config
               name: mockserver-config
@@ -89,11 +91,9 @@ metadata:
   labels:
     app: mockserver
 spec:
-  type: NodePort
   ports:
-    - port: {{ .Values.service.port }}
-      targetPort: http-web
+    - port: 8421
+      targetPort: 80
       protocol: TCP
-      name: http-web
   selector:
     app: mockserver
