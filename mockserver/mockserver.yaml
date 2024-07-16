@@ -65,7 +65,7 @@ spec:
             allowPrivilegeEscalation: false
             runAsUser: 0
           ports:
-            - containerPort: 80
+            - containerPort: 1080
           volumeMounts:
             - mountPath: /config
               name: mockserver-config
@@ -95,7 +95,7 @@ metadata:
 spec:
   ports:
     - port: 8421
-      targetPort: 80
+      targetPort: 1080
       protocol: TCP
   selector:
     app: mockserver
