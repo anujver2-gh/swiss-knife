@@ -1,0 +1,99 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mockserver-config
+  namespace: generic
+data:
+  expectationInitialiser.json: |
+    # this specifies where to read config from secret manager 
+    [
+      {
+          "httpRequest": {
+              "method": "GET",
+              "path": "/policy/\\?.*"
+          },
+          "httpResponse": {
+              "statusCode": 200,
+              "body": "Response for any /policy/ query path"
+          }
+      },
+      {
+          "httpRequest": {
+              "method": "GET",
+              "path": "/policy/.*"
+          },
+          "httpResponse": {
+              "statusCode": 200,
+              "body": "Response for any /policy/ path"
+          }
+      },
+      {
+          "httpRequest": {
+              "method": "GET",
+              "path": "/brain/.*"
+          },
+          "httpResponse": {
+              "statusCode": 200,
+              "body": "Response for any /brain/ path"
+          }
+      }
+    ]
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mockserver
+  labels:
+    app: mockserver
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mockserver
+  template:
+    metadata:
+      labels:
+        app: mockserver
+    spec:
+      containers:
+        - name: mockserver
+          image: 114040874283.dkr.ecr.cn-northwest-1.amazonaws.com.cn/china/generic:mockserver
+          imagePullPolicy: Always
+          securityContext:
+            allowPrivilegeEscalation: false
+            runAsUser: 0
+          volumeMounts:
+            - mountPath: /config
+              name: mockserver-config
+              readOnly: true
+          env:
+            - name: MOCKSERVER_INITIALIZATION_JSON_PATH
+              value: /config/expectationInitialiser.json
+            - name: MOCKSERVER_LOG_LEVEL
+              value: DEBUG
+            - name: MOCKSERVER_WATCH_INITIALIZATION_JSON
+              value: "true"
+      volumes:
+        - name: mockserver-config
+          configMap:
+            name: mockserver-config
+            items:
+              - key: expectationInitialiser.json
+                path: expectationInitialiser.json
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mockserver
+  labels:
+    app: mockserver
+spec:
+  type: NodePort
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: http-web
+      protocol: TCP
+      name: http-web
+  selector:
+    app: mockserver
