@@ -65,6 +65,7 @@ RUN $HOME/.asdf/bin/asdf install jq latest
 RUN apt-get install -y ripgrep \
     mysql-client
 
+RUN curl -sS https://webinstall.dev/curlie | bash
 # Set the working directory
 WORKDIR /workspace
 
