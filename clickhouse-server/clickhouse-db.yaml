@@ -2,7 +2,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: clickhouse-data
-  namespace: default
+  namespace: orlok
 spec:
   accessModes:
     - ReadWriteOnce
@@ -18,6 +18,7 @@ metadata:
   labels:
     app: clickhouse-db
   name: clickhouse-db
+  namespace: orlok
 spec:
   replicas: 1
   selector:
@@ -33,7 +34,7 @@ spec:
           persistentVolumeClaim:
             claimName: clickhouse-data
       containers:
-        - image: 072824598875.dkr.ecr.us-west-2.amazonaws.com/orlok-clickhouse-db:latest
+        - image: 114040874283.dkr.ecr.cn-northwest-1.amazonaws.com.cn/china/generic:clickhouse-server-22.8.8-alpine
           name: clickhouse
           # command: ["/bin/sh"]
           # args:
@@ -68,6 +69,7 @@ metadata:
   labels:
     app: clickhouse-db
   name: clickhouse-db
+  namespace: orlok
 spec:
   ports:
     - name: "8123"
