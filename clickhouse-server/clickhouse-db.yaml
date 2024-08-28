@@ -55,8 +55,8 @@ spec:
           persistentVolumeClaim:
             claimName: clickhouse-data
       containers:
-          name: clickhouse-db
-          image: 114040874283.dkr.ecr.cn-northwest-1.amazonaws.com.cn/china/generic:clickhouse-db-with-data
+        - name: clickhouse-db
+          image: 114040874283.dkr.ecr.cn-northwest-1.amazonaws.com.cn/china/generic:clickhouse-db-with-data-8253792
           imagePullPolicy: Always
           # command: ["/bin/sh"]
           # args:
@@ -83,7 +83,7 @@ spec:
 #          volumeMounts:
 #            - name: clickhouse-data
 #              mountPath: /var/lib/clickhouse
-      restartPolicy: Always
+          # restartPolicy: Always
 ---
 apiVersion: v1
 kind: Service
