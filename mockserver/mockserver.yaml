@@ -59,7 +59,7 @@ spec:
     spec:
       containers:
         - name: mockserver
-          image: 114040874283.dkr.ecr.cn-northwest-1.amazonaws.com.cn/china/generic:mockserver
+          image: 146618076670.dkr.ecr.cn-north-1.amazonaws.com.cn/china/generic:mockserver
           imagePullPolicy: Always
           securityContext:
             allowPrivilegeEscalation: false
