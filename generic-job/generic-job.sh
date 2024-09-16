@@ -39,7 +39,8 @@ if [[ $aws_env == 'china-dev' || $aws_env == 'china-prod' ]]; then
     aws ecr get-login-password --region ${AWS_REGION} | docker login -u AWS --password-stdin https://${AWS_ECR}/
     echo "Successfully logged into AWS ECR!..🔓"
 fi
-
+set -ex
 ## if commercial stage no need to login , its already logged in
 docker pull 146618076670.dkr.ecr.cn-north-1.amazonaws.com.cn/china/generic:swiss-knife
-docker push $AWS_ECR/china/generic:swiss-knife
+docker tag 146618076670.dkr.ecr.cn-north-1.amazonaws.com.cn/china/generic:swiss-knife 072824598875.dkr.ecr.us-west-2.amazonaws.com/china/generic:swiss-knife
+docker push 072824598875.dkr.ecr.us-west-2.amazonaws.com/china/generic:swiss-knife
