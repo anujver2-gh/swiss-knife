@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: swiss-knife-cisco
+  namespace: generic
+  labels:
+    app: swiss-knife-cisco
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: swiss-knife-cisco
+  template:
+    metadata:
+      labels:
+        app: swiss-knife-cisco
+    spec:
+      containers:
+        - name: swiss-knife-cisco
+          image: 563853376529.dkr.ecr.us-west-2.amazonaws.com/china/generic:swiss-knife
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+          securityContext:
+            allowPrivilegeEscalation: false
+            runAsUser: 0
