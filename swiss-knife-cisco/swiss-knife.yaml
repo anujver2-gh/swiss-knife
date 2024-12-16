@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: swiss-knife-cisco
-          image: 114040874283.dkr.ecr.cn-northwest-1.amazonaws.com.cn/china/generic:swiss-knife
+          image: 072824598875.dkr.ecr.us-west-2.amazonaws.com/china/generic:swiss-knife
           imagePullPolicy: Always
           ports:
             - containerPort: 80
