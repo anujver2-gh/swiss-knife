@@ -15,6 +15,8 @@ ARG DEBIAN_FRONTEND=noninteractive
 
 # Install Java 11, Python 3, MySQL client, nano, curl, cert tools, SSH tools, kubectl, Docker CLI, and other utilities
 RUN apt-get update && apt-get install -y \
+    build-essential \
+    python3-pip \
     curl \
     git \
     vim \
@@ -60,7 +62,7 @@ RUN $HOME/.asdf/bin/asdf install jq latest
 # RUN $HOME/.asdf/bin/asdf install jqp latest 
 # RUN $HOME/.asdf/bin/asdf install mysql 8.0.20
 # RUN $HOME/.asdf/bin/asdf install ripgrep 14.1.0
-# RUN $HOME/.asdf/bin/asdf install python 3.6.0
+RUN $HOME/.asdf/bin/asdf install python 3.9.0
 
 RUN apt-get install -y ripgrep \
     mysql-client

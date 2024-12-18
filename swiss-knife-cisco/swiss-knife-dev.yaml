@@ -24,3 +24,24 @@ spec:
           securityContext:
             allowPrivilegeEscalation: false
             runAsUser: 0
+          volumeMounts:
+            - name: swiss-knife-data
+              mountPath: /workspace
+      volumes:
+        - name: swiss-knife-data
+          persistentVolumeClaim:
+            claimName: swiss-knife-data
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: swiss-knife-data
+  namespace: generic
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+  storageClassName: gp2
+  volumeMode: Filesystem
